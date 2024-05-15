@@ -21,6 +21,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: databricks/setup-cli@main
+        env:
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_BUNDLE_ENV: production
+          
       - run: databricks configure --token --host https://e2-demo-field-eng.cloud.databricks.com/ ${{ secrets.DATABRICKS_TOKEN }}
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
