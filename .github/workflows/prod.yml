@@ -21,13 +21,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: databricks/setup-cli@main
-        env:  
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST}}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: production
+
       - run: databricks bundle deploy
         env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST}}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_BUNDLE_ENV: production
 
@@ -45,6 +42,6 @@ jobs:
 
       - run: databricks bundle run fe_medium_metrics --refresh-all
         env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST}}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_BUNDLE_ENV: production
